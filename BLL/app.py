@@ -4,7 +4,7 @@ from DAL.database import db, init_database
 from DAL.models import User
 
 # setup the application and specify where the template folder is located
-app = Flask(__name__, template_folder="../presentation/templates")
+app = Flask(__name__, template_folder="../presentation/templates", static_folder="../presentation/static")
 
 # Use SQLite in-memory database (temporary, erased when app stops)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
