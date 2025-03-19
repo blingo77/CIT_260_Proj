@@ -16,6 +16,17 @@ init_database(app=app)
 def home():
     return render_template("index.html")
 
+# This is required for the homepage to function
+@app.route("/login")  # Make sure this exists!
+def login():
+    return render_template("login.html")
+
+
+# This is required for the homepage to function
+@app.route("/signup")  # Also define the signup page
+def signup():
+    return render_template("signup.html")
+
 @app.route('/add_user', methods=['GET'])
 def add_user():
     new_user = User(name="John Doe", email="john@example.com")
