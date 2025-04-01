@@ -1,0 +1,15 @@
+<!-- templates/partials/guest_nav.html -->
+<header>
+    <nav>
+        <div class="logo">
+            <img src="{{ url_for('static', filename='images/logo_0_0.webp') }}" alt="Logo">
+            Exam Registration
+        </div>
+
+        <ul class="navbar">
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('login') }}">Login</a></li>
+            <li><a href="{{ url_for('signup') }}">Sign Up</a></li>
+        </ul>
+    </nav>
+</header>
