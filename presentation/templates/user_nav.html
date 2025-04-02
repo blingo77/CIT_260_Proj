@@ -1,0 +1,31 @@
+<!-- templates/partials/user_nav.html -->
+<header>
+    <nav>
+        <div class="logo">
+            <img src="{{ url_for('static', filename='images/logo_0_0.webp') }}" alt="Logo">
+            Exam Registration
+        </div>
+
+        <div class="hamburger" id="hamburger">&#9776;</div>
+
+        <ul class="user-menu" id="user-menu">
+            <li><a href="{{ url_for('dashboard') }}">Home</a></li>
+            <li><a href="{{ url_for('account') }}">Account</a></li>
+            <li><a href="{{ url_for('settings') }}">Settings</a></li>
+            <li><a href="{{ url_for('reports') }}">Reports</a></li>
+            <li><a href="{{ url_for('scheduled_tests') }}">Scheduled Tests</a></li>
+            <li><a href="{{ url_for('logout') }}">Logout</a></li>
+        </ul>
+    </nav>
+</header>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const hamburger = document.getElementById('hamburger');
+        const menu = document.getElementById('user-menu');
+
+        hamburger.addEventListener('click', () => {
+            menu.classList.toggle('active');
+        });
+    });
+</script>
