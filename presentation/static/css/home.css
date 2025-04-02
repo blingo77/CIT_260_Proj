@@ -139,7 +139,8 @@ main {
     gap: 15px;
     list-style: none;
     padding: 10px 0;
-    font-size: 14px;
+    font-size: 18px;
+    justify-content: center;
 }
 
 .loginsignup a {
