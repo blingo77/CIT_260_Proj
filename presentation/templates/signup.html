@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Registration</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/signup.css') }}"> 
+</head>
+<body>
+    <!---Header--->
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="{{ url_for('static', filename='images/logo_0_0.webp') }}" alt="Logo">
+                Exam Registration
+            </div>
+
+            <ul class="navbar">
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('login') }}">Login</a></li>
+                <li><a href="{{ url_for('signup') }}">Sign Up</a></li>
+            </ul>
+        </nav>
+    </header>
+     <!---Registration--->
+    <div class="container">
+        <h2><u>Student Registration</u></h2>
+        <form action="#" method="POST">
+            <label for="First Name">First Name</label>
+            <input type="text" id="First Name" name="First Name" required>
+
+            <label for="Last Name">Last Name</label>
+            <input type="text" id="Last Name" name="Last Name" required>
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="submit">Register</button>
+        </form>
+    </div>
+    <p>
+        <div class = "container">
+            Requirements: <br>
+            <br> Email must be a valid NHSE ID + @student.csn.edu. <br>
+            <br> Password is your valid NHSE ID.
+        </div>
+    </p>
+    </div>
+</body>
+</html>
