@@ -1,10 +1,11 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request, url_for, flash, redirect
 from flask import render_template
 from DAL.database import db, init_database
-from DAL.models import User
+from DAL.models import User, Student
 
 # setup the application and specify where the template folder is located
 app = Flask(__name__, template_folder="../presentation/templates", static_folder="../presentation/static")
+app.secret_key = "supersecretkey"
 
 # Use SQLite in-memory database (temporary, erased when app stops)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
@@ -20,9 +21,21 @@ def home():
 def signup():
     return render_template('signup.html')
 
-@app.route("/login")
+@app.route("/login", methods=["GET", "POST"])
 def login():
-    return render_template('login.html')
+    if request.method == "POST":
+        email = request.form.get("email")
+        password = request.form.get("password")
+
+        # Example logic (replace with your real user check)
+        user = Student.query.filter_by(email=email).first()
+        if user and user.password == password:  # Ideally, hash and verify passwords!
+            return f"Welcome, {user.email}!"  # Redirect to dashboard, etc.
+        else:
+            flash("Invalid login credentials.")
+            return redirect(url_for("login"))
+
+    return render_template("login.html")
 
 @app.route('/add_user', methods=['GET'])
 def add_user():
