@@ -2,7 +2,6 @@
    Global Styles & Variables
 =========================== */
 
-/* Colors */
 :root {
     --csn-blue: #1C478B;
     --csn-yellow: #F7D147;
@@ -10,35 +9,26 @@
     --csn-white: #FFFFFF;
 }
 
-/* Global Reset */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* General Body Styling */
-html, body {
+html,
+body {
     font-family: 'Montserrat', sans-serif;
     font-weight: bold;
     letter-spacing: 1px;
-    background-color: var(--csn-beige);
-}
-
-html, body {
     height: 100%;
     display: flex;
     flex-direction: column;
-    background-color: #FFFFFF;
+    background-color: var(--csn-white);
 }
 
-main {
-    flex: 1;
-    padding: 50px 20px 20px;
-    margin-top: 60px;
-}
+
 /* =========================
-   Header & Navigation (Desktop)
+   Header & Navigation
 =========================== */
 
 header {
@@ -57,7 +47,6 @@ header {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Navigation Bar */
 nav {
     display: flex;
     width: 100%;
@@ -65,23 +54,23 @@ nav {
     padding: 20px 30px;
 }
 
-/* Logo */
 .logo {
     display: flex;
     align-items: center;
     font-size: 22px;
+    gap: 10px;
     font-weight: bold;
     white-space: nowrap;
 }
 
 .logo img {
-    height: 70px;
+    height: 60px;
     width: auto;
-    padding-right: 15px;
+    max-width: 100%;
+    flex-shrink: 0;
     filter: drop-shadow(2px 2px 5px rgba(0, 0, 0, 0.3));
 }
 
-/* Navbar */
 .navbar {
     display: flex;
     list-style: none;
@@ -93,7 +82,6 @@ nav {
     justify-content: flex-end;
 }
 
-/* Navigation Links */
 .navbar li {
     display: inline-block;
 }
@@ -113,87 +101,49 @@ nav {
     border-radius: 5px;
 }
 
-/* =========================
-   Buttons
-=========================== */
-
-.button {
-    display: inline-block;
-    background-color: var(--csn-yellow);
+.hamburger {
+    position: absolute;
+    top: 50%;
+    right: 30px;
+    transform: translateY(-50%);
+    font-size: 28px;
+    cursor: pointer;
     color: var(--csn-blue);
-    padding: 10px 15px;
-    border-radius: 5px;
-    text-decoration: none;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
 }
 
-.button:hover {
-    background-color: #D4B02A;
-}
 
-/* Login & Signup Buttons */
-.loginsignup {
-    display: flex;
-    gap: 15px;
+.user-menu {
+    display: none;
     list-style: none;
+    position: absolute;
+    top: 85px;
+    right: 30px;
+    background: var(--csn-white);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    border-radius: 6px;
+    z-index: 1001;
+    flex-direction: column;
 }
 
-.loginsignup a {
-    padding: 10px 15px;
-    border-radius: 5px;
-    transition: background-color 0.3s ease, color 0.3s ease;
+.user-menu li {
+    margin: 0.5rem 0;
 }
 
-.loginsignup a:hover {
-    background-color: var(--csn-yellow);
-    color: var(--csn-blue);
-}
-
-/* =========================
-   Centered Content & Box Styling
-=========================== */
-
-/* Center the main content */
-.container {
-    max-width: 1000px; /* Limits content width */
-    margin: 0 auto; /* Centers the content horizontally */
-    padding: 20px; /* Adds spacing */
-}
-
-/* Box styling for sections */
-.box {
-    background-color: var(--csn-beige); /* CSN Beige */
-    border: 1px solid #ddd; /* Light border */
-    padding: 20px;
-    margin-bottom: 20px; /* Space between boxes */
-    border-radius: 5px; /* Rounded corners */
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Soft shadow */
-}
-
-/* Title inside boxes */
-.box h2 {
-    color: var(--csn-blue);
-    font-size: 20px;
-    margin-bottom: 10px;
-}
-
-/* Grid Layout for links inside boxes */
-.grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Two columns */
-    gap: 15px; /* Space between items */
-}
-
-/* Links inside the boxes */
-.box a {
-    color: var(--csn-blue);
+.user-menu a {
     text-decoration: none;
-    font-weight: bold;
+    color: var(--csn-blue);
+    padding: 0.5rem;
+    display: block;
 }
 
-.box a:hover {
-    text-decoration: underline;
+.user-menu a:hover {
+    background-color: var(--csn-yellow);
+    border-radius: 4px;
+}
+
+.user-menu.active {
+    display: flex;
 }
 
 /* =========================
@@ -201,15 +151,14 @@ nav {
 =========================== */
 
 footer {
-    background-color: var(--csn-blue);
-    color: var(--csn-white);
-    text-align: center;
-    padding: 15px 0;
-    width: 100%;
-    font-size: 14px;
-    position: relative;
+    position: flex;
     bottom: 0;
-    left: 0;
+    background-color: #1C478B;
+    color: #FFFFFF;
+    text-align: center;
+    padding: 10px;
+    font-size: 14px;
+    z-index: 1000;
 }
 
 footer a {
@@ -223,37 +172,29 @@ footer a:hover {
 }
 
 /* =========================
-   Responsive Design (Mobile & Tablet)
+   Responsive
 =========================== */
 
-/* Medium Screens (Tablets & Small Laptops) */
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 768px) {
     header {
-        height: 75px; /* Slightly smaller header */
-        padding: 0 20px;
+        padding: 0;
     }
 
-    .navbar {
-        max-width: 60%; /* Reduce navbar width */
-        gap: 15px;
-    }
-
-    .navbar a {
-        font-size: 14px;
-        padding: 8px 12px;
+    .logo {
+        display: flex;
+        align-items: center;
+        font-size: 22px;
+        gap: 10px;
+        font-weight: bold;
+        white-space: nowrap;
     }
 
     .logo img {
-        height: 60px; /* Slightly smaller logo */
-    }
-}
-
-/* Small Screens (Phones) */
-@media screen and (max-width: 768px) {
-    header {
-        flex-direction: column;
-        height: auto;
-        padding: 10px 15px;
+        height: 60px;
+        width: auto;
+        max-width: 100%;
+        flex-shrink: 0;
+        filter: drop-shadow(2px 2px 5px rgba(0, 0, 0, 0.3));
     }
 
     nav {
@@ -280,31 +221,27 @@ footer a:hover {
         width: 100%;
     }
 
-    .logo img {
-        height: 50px;
-    }
-}
-
-/* Extra Small Screens */
-@media screen and (max-width: 480px) {
-    body {
-        font-size: 14px;
+    .hamburger {
+        display: block;
+        font-size: 28px;
+        cursor: pointer;
+        color: #1C478B;
     }
 
-    header {
-        padding: 10px;
+    .user-menu {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        right: 30px;
+        top: 85px;
+        background-color: white;
+        padding: 1rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        z-index: 1001;
     }
 
-    .logo img {
-        height: 40px;
-    }
-
-    .navbar a {
-        font-size: 14px;
-        padding: 10px;
-    }
-
-    footer {
-        font-size: 12px;
+    .user-menu.active {
+        display: flex;
     }
 }

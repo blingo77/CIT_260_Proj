@@ -9,115 +9,102 @@
 </head>
 
 <body>
-    <!-- Header -->
-    <header>
-        <nav>
-            <div class="logo">
-                <img src="{{ url_for('static', filename='images/logo_0_0.webp') }}" alt="Logo">
-                Exam Registration
-            </div>
+    {% extends 'base.html' %}
 
-            <ul class="navbar">
-                <li><a href="{{ url_for('home') }}">Home</a></li>
-                <li><a href="{{ url_for('login') }}">Login</a></li>
-                <li><a href="{{ url_for('signup') }}">Sign Up</a></li>
-            </ul>
-        </nav>
-    </header>
+    {% block title %}Exam Registration - Home{% endblock %}
 
-    <!-- Main Content -->
-    <main>
-        <section class="box" style="background-color: #F8F1E3; padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem;">
-            <h1>Welcome to CSN Testing Services</h1>
-            <p>
-                The College of Southern Nevada Testing Centers provide a wide range of exam services for CSN students, faculty, and external institutions. Whether you're preparing for placement, instructor-led, or national exams, our centers are here to support your success.
-            </p>
-            <ul class="loginsignup">
-                <li><a href="{{ url_for('signup') }}" class="btn">Sign Up</a></li>
-                <li><a href="{{ url_for('login') }}" class="btn">Login</a></li>
-            </ul>
-        </section>
-        
-        <section id="news">
-            <h2>Featured Services & Announcements</h2>
-        
-            <div class="news-item">
-                <h3>CSN Placement Services</h3>
-                <p>
-                    CSN provides free placement testing for English and Math using Guided Self-Placement and ALEKS PPL. Testing is available at all three main campuses.
-                </p>
-            </div>
-        
-            <div class="news-item">
-                <h3>Professor/Instructor Exam Appointments</h3>
-                <p>
-                    Students taking CSN professor exams or online class exams must schedule an appointment. Walk-ins are available on a limited basis — mornings are recommended.
-                </p>
-            </div>
-        
-            <div class="news-item">
-                <h3>Accuplacer for Other Institutions</h3>
-                <p>
-                    CSN offers proctored Accuplacer testing for other institutions for a fee. Students can provide remote vouchers or have institutions send login information.
-                </p>
-            </div>
-        
-            <div class="news-item">
-                <h3>Testing Center Hours & Locations</h3>
-                <p>
-                    Visit one of our three main campuses: Charleston, North Las Vegas, or Henderson. For hours, rules, and scheduling info, click below.
-                    <br>
-                    <a href="#">View Testing Center Details</a>
-                </p>
-            </div>
-        </section>
-        <section id="testing-center-info">
-            <h2>Testing Center Overview</h2>
-            <p>
-                The CSN Testing Center serves as a gateway to student success at the College of Southern Nevada. We offer evidence-based placement, academic and professional exam proctoring, and remote testing services that support your academic journey — from entry to graduation.
-            </p>
-        
-            <p>
-                Our staff are committed to maintaining the highest standards of test security and professional integrity, following the <strong>NCTA Professional Standards and Guidelines</strong>. CSN Testing Centers are NCTA-certified and located at all three main campuses.
-            </p>
-        
-            <h3>Campus Locations</h3>
-            <div class="campus-list">
-                <div class="campus">
-                    <h4>Charleston Campus</h4>
-                    <p>6375 W. Charleston Blvd.<br>Las Vegas, NV 89146<br>Building D, Main Lobby<br><strong>Phone:</strong> 702-651-5733</p>
-                </div>
-        
-                <div class="campus">
-                    <h4>North Las Vegas Campus</h4>
-                    <p>3200 Cheyenne Ave.<br>Las Vegas, NV 89030<br>Building E, Room 122<br><strong>Phone:</strong> 702-651-4050</p>
-                </div>
-        
-                <div class="campus">
-                    <h4>Henderson Campus</h4>
-                    <p>700 College Dr.<br>Henderson, NV 89002<br>Building A, Room 120<br><strong>Phone:</strong> 702-651-3128</p>
-                </div>
-            </div>
-        
-            <h3>Testing Center Hours</h3>
-            <p>
-                <strong>Monday – Friday:</strong> 8:00 AM – 5:00 PM<br>
-                <strong>Last walk-in:</strong> 2:30 PM<br>
-                <em>Closed on weekends and state/federal holidays.</em><br>
-                <a href="#">Click here for Nevada Observed Holidays</a>
-            </p>
-        
-            <p>Questions? Contact us at <a href="mailto:testingcenter@csn.edu">testingcenter@csn.edu</a> or call 702-651-7345.</p>
-        </section>
-        
-    </main>
+    {% block content %}
 
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2025 Exam Registration. All rights reserved. |
-            <a href="https://github.com/blingo77/CIT_260_Proj" target="_blank">GitHub Repository</a>
+    <!-- Content -->
+    <section class="box" style="background-color: #F8F1E3; padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem;">
+        <h1>Welcome to CSN Testing Services</h1>
+        <p>
+            The College of Southern Nevada Testing Centers provide a wide range of exam services for CSN students,
+            faculty, and external institutions. Whether you're preparing for placement, instructor-led, or national
+            exams, our centers are here to support your success.
         </p>
-    </footer>
+        <ul class="loginsignup">
+            <li><a href="{{ url_for('signup') }}" class="btn">Sign Up</a></li>
+            <li><a href="{{ url_for('login') }}" class="btn">Login</a></li>
+        </ul>
+    </section>
+
+    <section id="news">
+        <h2>Featured Services & Announcements</h2>
+
+        <div class="news-item">
+            <h3>CSN Placement Services</h3>
+            <p>
+                CSN provides free placement testing for English and Math using Guided Self-Placement and ALEKS PPL.
+                Testing is available at all three main campuses.
+            </p>
+        </div>
+
+        <div class="news-item">
+            <h3>Professor/Instructor Exam Appointments</h3>
+            <p>
+                Students taking CSN professor exams or online class exams must schedule an appointment. Walk-ins are
+                available on a limited basis — mornings are recommended.
+            </p>
+        </div>
+
+        <div class="news-item">
+            <h3>Accuplacer for Other Institutions</h3>
+            <p>
+                CSN offers proctored Accuplacer testing for other institutions for a fee. Students can provide remote
+                vouchers or have institutions send login information.
+            </p>
+        </div>
+
+    </section>
+
+    <section id="testing-center-info">
+        <h2>Testing Center Overview</h2>
+        <p>
+            The CSN Testing Center serves as a gateway to student success at the College of Southern Nevada. We offer
+            evidence-based placement, academic and professional exam proctoring, and remote testing services that
+            support your academic journey — from entry to graduation.
+        </p>
+
+        <p>
+            Our staff are committed to maintaining the highest standards of test security and professional integrity,
+            following the <strong>NCTA Professional Standards and Guidelines</strong>. CSN Testing Centers are
+            NCTA-certified and located at all three main campuses.
+        </p>
+
+        <h3>Campus Locations</h3>
+        <div class="campus-list">
+            <div class="campus">
+                <h4>Charleston Campus</h4>
+                <p>6375 W. Charleston Blvd.<br>Las Vegas, NV 89146<br>Building D, Main Lobby<br><strong>Phone:</strong>
+                    702-651-5733</p>
+            </div>
+
+            <div class="campus">
+                <h4>North Las Vegas Campus</h4>
+                <p>3200 Cheyenne Ave.<br>Las Vegas, NV 89030<br>Building E, Room 122<br><strong>Phone:</strong>
+                    702-651-4050</p>
+            </div>
+
+            <div class="campus">
+                <h4>Henderson Campus</h4>
+                <p>700 College Dr.<br>Henderson, NV 89002<br>Building A, Room 120<br><strong>Phone:</strong>
+                    702-651-3128</p>
+            </div>
+        </div>
+
+        <h3>Testing Center Hours</h3>
+        <p>
+            <strong>Monday – Friday:</strong> 8:00 AM – 5:00 PM<br>
+            <strong>Last walk-in:</strong> 2:30 PM<br>
+            <em>Closed on weekends and state/federal holidays.</em><br>
+        </p>
+
+        <p>Questions? Contact us at <a href="mailto:testingcenter@csn.edu">testingcenter@csn.edu</a> or call
+            702-651-7345.</p>
+    </section>
+
+    {% endblock %}
 </body>
 
 </html>
