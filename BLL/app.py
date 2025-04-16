@@ -1,7 +1,8 @@
 from flask import Flask, jsonify, request, url_for, flash, redirect
 from flask import render_template
 from DAL.database import db, init_database
-from DAL.models import User, Student
+from DAL.models import User, Student, Faculty
+from .app_utils import createUsers, validateEmail
 
 # setup the application and specify where the template folder is located
 app = Flask(__name__, template_folder="../presentation/templates", static_folder="../presentation/static")
@@ -12,6 +13,16 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 init_database(app=app)
+
+# run script to add users
+createUsers(app)
+
+#store logged in info
+loggedInUser = { 
+    "firstName": "",
+    "lastName" : "",
+    "email"    : ""
+}
 
 @app.route('/')
 def home():
@@ -53,17 +64,51 @@ def signup():
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
-        email = request.form.get("email")
+        email = request.form.get("email").lower()
+        validateEmail(email)
+
         password = request.form.get("password")
         print(email)
 
-        # Example logic (replace with your real user check)
-        user = Student.query.filter_by(email=email).first()
-        print(user)
-        print(user.NSHEID, "===", password )
-        if user and user.NSHEID == int(password):  # Ideally, hash and verify passwords!
-            print("SUCCESS")
-            return redirect(url_for("confirmation")) # Redirect to confirmation page
+
+        # if login was by student
+        if validateEmail(email) == 1:
+            user = Student.query.filter_by(email=email).first()
+
+            print(user)
+            print(user.NSHEID, "===", password )
+
+            if user and user.NSHEID == int(password):  # Ideally, hash and verify passwords!
+
+                loggedInUser["firstName"] = user.firstName
+                loggedInUser["lastName"]  = user.lastName
+                loggedInUser["email"]     = user.email
+                
+                print(loggedInUser)
+                return redirect(url_for("confirmation")) # Redirect to confirmation page
+            else:
+                print("FAIL")
+                flash("Invalid login credentials.")
+                return redirect(url_for("login"))
+        # if login was by faculty
+        elif validateEmail(email) == 2:
+            user = Faculty.query.filter_by(email=email).first()
+
+            print(user)
+            print(user.password, "===", password )
+
+            if user and user.password == password:  # Ideally, hash and verify passwords!
+
+                loggedInUser["firstName"] = user.firstName
+                loggedInUser["lastName"]  = user.lastName
+                loggedInUser["email"]     = user.email
+                
+                print(loggedInUser)
+                return redirect(url_for("confirmation")) # Redirect to confirmation page
+            else:
+                print("FAIL")
+                flash("Invalid login credentials.")
+                return redirect(url_for("login"))
         else:
             print("FAIL")
             flash("Invalid login credentials.")

@@ -30,6 +30,7 @@ class Faculty(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     firstName = db.Column(db.String(100), nullable=False)
     lastName = db.Column(db.String(100), nullable=False)
+    password = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(100), nullable=False)
 
     def to_dict(self):
@@ -37,6 +38,7 @@ class Faculty(db.Model):
             "id": self.id, 
             "FirstName": self.firstName, 
             "LastName": self.lastName,
+            "password": self.password,
             "Email": self.email}
 
 class Exams(db.Model):
