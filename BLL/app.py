@@ -69,7 +69,7 @@ def login():
         print(user.NSHEID, "===", password )
         if user and user.NSHEID == int(password):  # Ideally, hash and verify passwords!
             print("SUCCESS")
-            return f"Welcome, {user.email}!"  # Redirect to dashboard, etc.
+            return redirect(url_for("confirmation")) # Redirect to confirmation page
         else:
             print("FAIL")
             flash("Invalid login credentials.")

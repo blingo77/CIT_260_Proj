@@ -57,12 +57,13 @@ body {
     padding: 5px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 350px;
+    width: 600px;
     text-align: center;
 }
 
 label {
-    font-family: 'Montserrat', sans-serif;  /* Different font for labels */
+    font-family: 'Montserrat', sans-serif;
+    /* Different font for labels */
     font-weight: bold;
     display: block;
     margin-top: 5px;
@@ -139,4 +140,26 @@ nav {
     background-color: #F7D147;
     color: #1C478B;
     border-radius: 5px;
+}
+
+.form-wrapper {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    /* adds spacing between form and requirements */
+    align-items: flex-start;
+}
+
+form {
+    flex: 1;
+}
+
+.requirements {
+    flex: 1;
+    background-color: #f5f5f5;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 14px;
+    margin-top: 100px;
+    margin-left: -25px;
 }

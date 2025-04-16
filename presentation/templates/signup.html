@@ -1,53 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Account Registration</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/signup.css') }}"> 
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/signup.css') }}">
 </head>
+
 <body>
     <!---Header--->
-    <header>
-        <nav>
-            <div class="logo">
-                <img src="{{ url_for('static', filename='images/logo_0_0.webp') }}" alt="Logo">
-                Exam Registration
-            </div>
-
-            <ul class="navbar">
-                <li><a href="{{ url_for('home') }}">Home</a></li>
-                <li><a href="{{ url_for('login') }}">Login</a></li>
-                <li><a href="{{ url_for('signup') }}">Sign Up</a></li>
-            </ul>
-        </nav>
-    </header>
-     <!---Registration--->
+    {% extends 'base.html' %}
+    {% block head_extra %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/signup.css') }}">
+    {% endblock %}
+    {% block title %}Exam Registration - Home{% endblock %}
+    {% block footer %}{% endblock %}
+    {% block content %}
+    <!---Registration--->
     <div class="container">
-        <h2><u>Student Registration</u></h2>
-        <form action="/signup" method="POST">
-            <label for="first_name">First Name</label>
-            <input type="text" id="first_name" name="first_name" required>
-        
-            <label for="last_name">Last Name</label>
-            <input type="text" id="last_name" name="last_name" required>
-        
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" required>
-        
-            <label for="NSHEID">NSHE ID</label>
-            <input type="text" id="NSHEID" name="NSHEID" required>
-        
-            <button type="submit">Register</button>
-        </form>
-    </div>
-    <p>
-        <div class = "container">
-            Requirements: <br>
-            <br> Email must be a valid NHSE ID + @student.csn.edu. <br>
-            <br> Password is your valid NHSE ID.
+        <h2><u>Student Registration<br></u></h2>
+
+        <!-- Flex wrapper for side-by-side layout -->
+        <div class="form-wrapper">
+            <form action="/signup" method="POST">
+                <label for="first_name"><br>First Name</label>
+                <input type="text" id="first_name" name="first_name" required>
+
+                <label for="last_name">Last Name</label>
+                <input type="text" id="last_name" name="last_name" required>
+
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="NSHEID">NSHE ID</label>
+                <input type="text" id="NSHEID" name="NSHEID" required>
+
+                <button type="submit">Register</button>
+            </form>
+
+            <!-- Requirements section -->
+            <div class="requirements">
+                <strong>Requirements:</strong><br><br>
+                Email must be a valid NSHE ID + @student.csn.edu.<br><br>
+                Password is your valid NSHE ID.
+            </div>
         </div>
-    </p>
     </div>
+
+    {% endblock %}
 </body>
+
 </html>
