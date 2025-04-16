@@ -8,7 +8,25 @@ students = {
         "lastName":"Lingo",
         "email":"brandon.lingo@student.csn.edu",
         "NSHEID":int("5008945170")
-        }
+        },
+    1 :{
+        "firstName":"David",
+        "lastName":"Pascual",
+        "email":"David.Pascual@student.csn.edu",
+        "NSHEID":int("0")
+        },
+    2 :{
+        "firstName":"Xander",
+        "lastName":"Luber-Decena",
+        "email":"Xander.Luber-Decena@student.csn.edu",
+        "NSHEID":int("0")
+        },
+    3 :{
+        "firstName":"Javier",
+        "lastName":"Hernandez",
+        "email":"Javier.Hernandez@student.csn.edu",
+        "NSHEID":int("0")
+        },
 }
 
 faculty = { 
