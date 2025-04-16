@@ -2,6 +2,7 @@ from flask import Flask, jsonify, request, url_for, flash, redirect
 from flask import render_template
 from DAL.database import db, init_database
 from DAL.models import User, Student
+from .app_utils import createUsers, validateEmail
 
 # setup the application and specify where the template folder is located
 app = Flask(__name__, template_folder="../presentation/templates", static_folder="../presentation/static")
@@ -12,6 +13,9 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 init_database(app=app)
+
+# run script to add users
+createUsers(app)
 
 @app.route('/')
 def home():
@@ -54,6 +58,8 @@ def signup():
 def login():
     if request.method == "POST":
         email = request.form.get("email")
+        validateEmail(email)
+
         password = request.form.get("password")
         print(email)
 
