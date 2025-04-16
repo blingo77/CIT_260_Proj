@@ -1,10 +1,11 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request, url_for, flash, redirect
 from flask import render_template
 from DAL.database import db, init_database
-from DAL.models import User
+from DAL.models import User, Student
 
 # setup the application and specify where the template folder is located
 app = Flask(__name__, template_folder="../presentation/templates", static_folder="../presentation/static")
+app.secret_key = "supersecretkey"
 
 # Use SQLite in-memory database (temporary, erased when app stops)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
@@ -16,13 +17,59 @@ init_database(app=app)
 def home():
     return render_template("index.html")
 
-@app.route("/signup")
+@app.route("/signup", methods=["GET", "POST"])
 def signup():
-    return render_template('signup.html')
+    if request.method == "POST":
 
-@app.route("/login")
+        print(request.form)
+
+        first_name = request.form.get("first_name")
+        last_name = request.form.get("last_name")
+        email = request.form.get("email")
+        password = request.form.get("NSHEID")
+
+        # Check if user already exists
+        existing_user = Student.query.filter_by(email=email).first()
+        if existing_user:
+            flash("Email already registered.")
+            return redirect(url_for("signup"))
+
+        # Create and save new user with plain password
+        new_user = Student(
+            firstName=first_name,
+            lastName=last_name,
+            email=email,
+            NSHEID=int(password)  # ❗ plain text password – only for testing!
+        )
+
+        db.session.add(new_user)
+        db.session.commit()
+
+        flash("Account created successfully!")
+        return redirect(url_for("login"))
+
+    return render_template("signup.html")
+
+@app.route("/login", methods=["GET", "POST"])
 def login():
-    return render_template('login.html')
+    if request.method == "POST":
+        email = request.form.get("email")
+        password = request.form.get("password")
+        print(email)
+
+        # Example logic (replace with your real user check)
+        user = Student.query.filter_by(email=email).first()
+        print(user)
+        print(user.NSHEID, "===", password )
+        if user and user.NSHEID == int(password):  # Ideally, hash and verify passwords!
+            print("SUCCESS")
+            return f"Welcome, {user.email}!"  # Redirect to dashboard, etc.
+        else:
+            print("FAIL")
+            flash("Invalid login credentials.")
+            return redirect(url_for("login"))
+
+    return render_template("login.html")
 
 @app.route('/add_user', methods=['GET'])
 def add_user():

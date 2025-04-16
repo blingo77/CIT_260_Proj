@@ -9,7 +9,7 @@ class User(db.Model):
     def to_dict(self):
         return {"id": self.id, "name": self.name, "email": self.email}
     
-class Student:
+class Student(db.Model):
     __tablename__ = "students"
     id = db.Column(db.Integer, primary_key=True)
     firstName = db.Column(db.String(100), nullable=False)
@@ -25,7 +25,7 @@ class Student:
             "Email": self.email,
             "NSHEID": self.NSHEID}
     
-class Faculty:
+class Faculty(db.Model):
     __tablename__ = "faculty"
     id = db.Column(db.Integer, primary_key=True)
     firstName = db.Column(db.String(100), nullable=False)
@@ -39,7 +39,7 @@ class Faculty:
             "LastName": self.lastName,
             "Email": self.email}
 
-class Exams:
+class Exams(db.Model):
     __tablename__ = "exams"
     id = db.Column(db.Integer, primary_key=True)
     examName = db.Column(db.String(100), nullable=False)
