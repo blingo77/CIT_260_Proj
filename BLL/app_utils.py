@@ -12,19 +12,19 @@ students = {
     1 :{
         "firstName":"David",
         "lastName":"Pascual",
-        "email":"David.Pascual@student.csn.edu",
-        "NSHEID":int("0")
+        "email":"david.pascual@student.csn.edu",
+        "NSHEID":int("01")
         },
     2 :{
         "firstName":"Xander",
         "lastName":"Luber-Decena",
-        "email":"Xander.Luber-Decena@student.csn.edu",
+        "email":"xander.luber-decena@student.csn.edu",
         "NSHEID":int("0")
         },
     3 :{
         "firstName":"Javier",
         "lastName":"Hernandez",
-        "email":"Javier.Hernandez@student.csn.edu",
+        "email":"javier.hernandez@student.csn.edu",
         "NSHEID":int("0")
         },
 }
@@ -50,9 +50,14 @@ def createUsers(app):
                 email     =  students[i]["email"],
                 NSHEID    =  students[i]["NSHEID"]  # ❗ plain text password – only for testing!
             )
-
             db.session.add(new_user)
             db.session.commit()
+            
+        studentss = Student.query.all()  # Returns a list of all student objects
+    
+        # You can either print them out in the console or pass them to the template
+        for student in studentss:
+            print(f"Name: {student.firstName} {student.lastName}, Email: {student.email}, NSHEID: {student.NSHEID}")
 
         # add faculty
         for i in range(len(faculty)):

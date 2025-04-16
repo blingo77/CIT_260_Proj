@@ -65,17 +65,17 @@ def signup():
 def login():
     if request.method == "POST":
         email = request.form.get("email").lower()
-        validateEmail(email)
 
         password = request.form.get("password")
         print(email)
-
 
         # if login was by student
         if validateEmail(email) == 1:
             user = Student.query.filter_by(email=email).first()
 
-            print(user)
+            if user is None: return redirect(url_for("login"))
+
+            print(user.firstName)
             print(user.NSHEID, "===", password )
 
             if user and user.NSHEID == int(password):  # Ideally, hash and verify passwords!
@@ -93,6 +93,8 @@ def login():
         # if login was by faculty
         elif validateEmail(email) == 2:
             user = Faculty.query.filter_by(email=email).first()
+
+            if user is None: return redirect(url_for("login"))
 
             print(user)
             print(user.password, "===", password )
