@@ -1,4 +1,6 @@
 /* Colors */
+
+
 :root {
     --csn-blue: #1C478B;
     --csn-yellow: #F7D147;
@@ -51,7 +53,7 @@ body {
 
 .container {
     font-weight: bold;
-    margin-top: 75px;
+    margin-top: 90px;
     margin-right: 50px;
     background: var(--csn-beige);
     padding: 5px;
