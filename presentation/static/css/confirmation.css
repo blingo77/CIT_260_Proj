@@ -1,0 +1,67 @@
+/* =========================
+   Global Styles & Variables
+=========================== */
+
+/* Colors */
+:root {
+    --csn-blue: #1C478B;
+    --csn-yellow: #F7D147;
+    --csn-beige: #F8F1E3;
+    --csn-white: #FFFFFF;
+}
+
+/* Global Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* General Body Styling */
+html, body {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    letter-spacing: 1px;
+    background-color: var(--csn-beige);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+    padding: 50px 20px 20px;
+    margin-top: 60px;
+}
+
+/* Centered Content & Box Styling */
+.container {
+    max-width: 600px;
+    margin: auto;
+    text-align: center;
+    background: var(--csn-white);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: var(--csn-blue);
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    margin: 20px auto 0;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: var(--csn-blue);
+    background-color: var(--csn-yellow);
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #D4B02A;
+}
