@@ -46,7 +46,11 @@ class Exams(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     examName = db.Column(db.String(100), nullable=False)
     examTeacher = db.Column(db.String(100), nullable=False)
+    examLocation = db.Column(db.String(100), nullable=False)
     examDate = db.Column(db.Date, nullable=True)
+    examTime = db.Column(db.Date, nullable=True)
+    examCapacity = db.Column(db.Integer, nullable=True)
+    examCount = db.Column(db.Integer, nullable=True)
 
     def to_dict(self):
         return{

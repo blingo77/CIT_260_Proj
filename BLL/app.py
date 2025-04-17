@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request, url_for, flash, redirect
 from flask import render_template
 from DAL.database import db, init_database
-from DAL.models import User, Student, Faculty
+from DAL.models import User, Student, Faculty, Exams
 from .app_utils import createUsers, validateEmail
 
 # setup the application and specify where the template folder is located
@@ -135,8 +135,35 @@ def get_users():
 def confirmation():
     return render_template("confirmation.html")
 
+@app.route('/filter', methods=['GET'])
+def filter():
+
+    location = request.args.get('location')
+
+    # Assuming "examTeacher" corresponds to location
+    # and "examName" corresponds to subject
+
+    print(location)
+    query = Exams.query
+
+    if location:
+        query = query.filter(Exams.examLocation == location)
+
+    results = query.all()
+
+    print(results)
+
+    # You can return as JSON or pass to a template
+    return render_template("filter.html")
 
 
+@app.route('/logout')
+def logout():
+    loggedInUser["firstName"] = ""
+    loggedInUser["lastName"] = ""
+    loggedInUser["email"] = ""
+
+    return render_template("login.html")
 
 if __name__ == "__main__":
     app.run(debug=True)

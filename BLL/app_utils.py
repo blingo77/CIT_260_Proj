@@ -1,4 +1,4 @@
-from DAL.models import User, Student, Faculty
+from DAL.models import Student, Faculty, Exams
 from DAL.database import db
 from flask import current_app
 
@@ -38,6 +38,16 @@ faculty = {
         }
 }
 
+exams = { 
+    0 :{
+        "examName":"Fortnite BR",
+        "examTeacher":"Coombs",
+        "examLocation": "Henderson",
+        "examCount": 2,
+        "examCapacity": 20
+        }
+}
+
 def createUsers(app):
 
     with app.app_context():
@@ -52,13 +62,7 @@ def createUsers(app):
             )
             db.session.add(new_user)
             db.session.commit()
-            
-        studentss = Student.query.all()  # Returns a list of all student objects
-    
-        # You can either print them out in the console or pass them to the template
-        for student in studentss:
-            print(f"Name: {student.firstName} {student.lastName}, Email: {student.email}, NSHEID: {student.NSHEID}")
-
+                
         # add faculty
         for i in range(len(faculty)):
             new_user = Faculty(
@@ -70,6 +74,19 @@ def createUsers(app):
 
             db.session.add(new_user)
             db.session.commit()
+
+        for i in range(len(exams)):
+            new_exam = Exams(
+                examName =  exams[i]["examName"],
+                examTeacher  =  exams[i]["examTeacher"],
+                examLocation = exams[i]["examLocation"],
+                examCount     =  exams[i]["examCount"],
+                examCapacity  =  exams[i]["examCapacity"]  # ❗ plain text password – only for testing!
+            )
+
+            db.session.add(new_exam)
+            db.session.commit()
+
 
 def validateEmail(email):
 

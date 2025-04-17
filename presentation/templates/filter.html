@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Registration</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/signup.css') }}">
+</head>
+
+<body>
+    <!---Header--->
+    {% extends 'base.html' %}
+    {% block head_extra %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/signup.css') }}">
+    {% endblock %}
+    {% block title %}Exam Registration - Home{% endblock %}
+    {% block footer %}{% endblock %}
+    {% block content %}
+    <div class="container">
+        <h1>Exams</h1>
+    
+        <form method="GET" action="/filter">
+            <label for="location">Location:</label>
+            <select id="location" name="location">
+                <option value="Cheyenne">Cheyenne</option>
+                <option value="Henderson">Henderson</option>
+                <option value="West Charleston">West Charleston</option>
+            </select>
+    
+            <button type="submit">Filter</button>
+        </form>
+    </div>
+
+    {% endblock %}
+</body>
+
+</html>
