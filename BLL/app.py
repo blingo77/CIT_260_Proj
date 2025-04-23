@@ -135,6 +135,10 @@ def get_users():
 def confirmation():
     return render_template("confirmation.html")
 
+# needs to be updated to allow only logged in faculty to view
+@app.route('/examReport')
+def examReport():
+    return render_template("faculty/examReport.html")
 
 
 
