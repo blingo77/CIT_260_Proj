@@ -1,0 +1,191 @@
+/* Base Layout */
+main {
+    flex: 1;
+    width: 95%;
+    margin: 0 auto 2rem auto;
+    padding: calc(85px + 1rem) 1.5rem 1.5rem 1.5rem;
+    background-color: var(--csn-white);
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+html, body {
+    min-width: 800px;
+    overflow-x: auto;
+}
+
+/* Report Box Styling */
+.report-box {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: var(--csn-beige);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    text-align: center;
+}
+
+/* Filter Form Styling */
+.filter-form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    text-align: center;
+}
+
+
+.filter-form .form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.filter-form label {
+    margin-bottom: 0.3rem;
+    color: var(--csn-blue);
+}
+
+.filter-form input,
+.filter-form select {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 0.95rem;
+}
+
+.btn-filter {
+    background-color: var(--csn-blue);
+    color: white;
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-filter:hover {
+    background-color: #16376f;
+}
+
+/* Table Wrapper */
+.exam-report-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+/* Table Styling */
+.exam-report-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-top: 1.5rem;
+    font-size: 0.95rem;
+    background-color: var(--csn-blue);
+    border: 1px solid black;
+    border-radius: 10px;
+    overflow: hidden;
+    color: var(--csn-yellow);
+}
+
+.exam-report-table th,
+.exam-report-table td {
+    padding: 12px 16px;
+    border: 1px solid black;
+    text-align: left;
+    background-color: var(--csn-blue);
+    color: white;
+}
+
+.exam-report-table td {
+    background-color: var(--csn-white);
+    color: #000;
+}
+
+.exam-report-table th {
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+
+/* Print Button */
+.btn {
+    margin-top: 1.5rem;
+    padding: 0.6rem 1.2rem;
+    background-color: var(--csn-yellow);
+    color: #000;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+/* Print Styles */
+@media print {
+    main, .report-container {
+        all: unset;
+        display: block;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    .exam-report-table-wrapper {
+        width: 100%;
+        overflow: visible;
+    }
+
+    .exam-report-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 1rem;
+        font-size: 11pt;
+        background-color: var(--csn-blue);
+    }
+
+    .exam-report-table th,
+    .exam-report-table td {
+        border: 1px solid #000;
+        padding: 6px;
+        text-align: left;
+        background-color: var(--csn-blue);
+        color: var(--csn-yellow);
+    }
+
+    .exam-report-table th {
+        font-weight: bold;
+    }
+
+    .exam-report-table th,
+    .exam-report-table td {
+        padding: 12px 16px;
+        border: 3px solid black;
+        text-align: left;
+        background-color: var(--csn-blue);
+        color: black;
+        border-radius: 0px;
+    }
+
+    .exam-report-table td {
+        background-color: var(--csn-beige);
+        color: #000;
+    }
+
+    h2 {
+        font-size: 18pt;
+        text-align: center;
+        margin: 0.5in 0 0.25in 0;
+    }
+
+    header,
+    nav,
+    footer,
+    .filter-form,
+    .print-btn {
+        display: none !important;
+    }
+
+    @page {
+        margin: 0.75in;
+    }
+}
