@@ -25,7 +25,15 @@
         <h4><strong>Time:</strong> {{ exam.examTime }}</h4>
         <h4><strong>Capacity:</strong> {{ exam.examCapacity }}</h4>
         <h4><strong>Currently Registered:</strong> {{ exam.examCount }}</h4>
+
+        <form method="POST" action="{{ url_for('register_exam', exam_id=exam.id) }}">
+            <input type="hidden" name="studentId" value="{{ loggedInUser.id }}">
+            <input type="hidden" name="locationId" value="{{ exam.locationId }}">
+            <button type="submit" class="btn btn-primary mt-3">Register for This Exam</button>
+        </form>
+
     </div>
+
     {% endblock %}
 
 

@@ -68,3 +68,13 @@ class Location(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     campus = db.Column(db.String(100), nullable=False)
 
+class Report(db.Model):
+    __tablename__ = 'report'
+    id = db.Column(db.Integer, primary_key=True)
+    
+    studentId = db.Column(db.Integer, db.ForeignKey('students.id'), nullable=False)
+    examId = db.Column(db.Integer, db.ForeignKey('exams.id'), nullable=False)
+    
+    # Relationships
+    student = db.relationship('Student', backref='reports', lazy=True)
+    exam = db.relationship('Exams', backref='reports', lazy=True)

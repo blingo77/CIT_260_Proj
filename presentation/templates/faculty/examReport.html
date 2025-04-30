@@ -133,7 +133,19 @@ The dummy data needs to be removed allowed to pull from the database.
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Result rows injected by Javascript dummy data -->
+                    {% for report in reports %}
+                    <tr>
+                        <td>{{ report.student.firstName }} {{ report.student.lastName }}</td>
+                        <td>{{ report.exam.examName }}</td>
+                        <td>{{ report.exam.examDate }}</td>
+                        <td>{{ report.exam.examTime }}</td>
+                        <td>Room {{ report.exam.location.roomNumber }}</td>
+                        <td>{{ report.exam.location.campus }}</td>
+                        <td>{{ report.exam.faculty.firstName }} {{ report.exam.faculty.lastName }}</td>
+                    </tr>
+                    {% else %}
+                    <tr><td colspan="7">No exam reports found.</td></tr>
+                    {% endfor %}
                 </tbody>
             </table>
         </div>

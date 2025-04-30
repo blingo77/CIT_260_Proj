@@ -2,7 +2,9 @@
 <header>
     <nav>
         <div class="logo">
-            <img src="{{ url_for('static', filename='images/logo_0_0.webp') }}" alt="Logo">
+            <a href="{{ url_for('home') }}">
+                <img src="{{ url_for('static', filename='images/logo_0_0.webp') }}" alt="Logo">
+            </a>
             Exam Registration
         </div>
 
@@ -10,16 +12,20 @@
         <!-- These below are using login page as a placeholder until we make the pages -->
         <ul class="user-menu" id="user-menu">
             <li><a href="{{ url_for('home') }}">Home</a></li>
-            <li><a href="{{ url_for('login') }}">Account</a></li>
-            <li><a href="{{ url_for('login') }}">Settings</a></li>
-<<<<<<< HEAD
-            <li><a href="{{ url_for('login') }}">Reports</a></li>
-            <li><a href="{{ url_for('filter') }}">Scheduled Tests</a></li>
-=======
-            <li><a href="{{ url_for('examReport') }}">Reports</a></li>
-            <li><a href="{{ url_for('login') }}">Scheduled Tests</a></li>
->>>>>>> 3f0a005567030e6531b9ad72fd3ddcdb8a7a2f94
-            <li><a href="{{ url_for('login') }}">Logout</a></li>
+
+            {% if loggedInUser and loggedInUser.role == 'faculty' %}
+                <li><a href="{{ url_for('examReport') }}">Reports</a></li>
+                <li><a href="{{ url_for('filter') }}">Scheduled Tests</a></li>
+                <li><a href="{{ url_for('logout') }}">Logout</a></li>
+            {% elif loggedInUser and loggedInUser.role == 'student' %}
+                <li><a href="{{ url_for('filter') }}">Scheduled Tests</a></li>
+                <li><a href="{{ url_for('logout') }}">Logout</a></li>
+            {% endif %}
+        
+            {% if not loggedInUser %}
+            <li><a href="{{ url_for('login') }}">Login</a></li>
+            {% endif %}
+
         </ul>
 
     </nav>
