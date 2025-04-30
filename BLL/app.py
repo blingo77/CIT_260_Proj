@@ -160,10 +160,9 @@ def exam_detail(exam_id):
     return render_template("exam_detail.html", exam=exam, loggedInUser=loggedInUser)
 
 # needs to be updated to allow only logged in faculty to view
-@app.route('/examReport')
-def examReport():
-    reports = Report.query.all()  # Or filter by logged-in faculty
-    return render_template("faculty/examReport.html", reports=reports)
+@app.route("/faculty/report")
+def faculty_report():
+    return render_template("faculty/examReport.html")
 
 
 @app.route('/exam/<int:exam_id>/register', methods=['POST'])
