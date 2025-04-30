@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Registration</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/signup.css') }}">
+</head>
+
+<body>
+    <!---Header--->
+    {% extends 'base.html' %}
+    {% block head_extra %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/signup.css') }}">
+    {% endblock %}
+    {% block title %}Exam Registration - Home{% endblock %}
+    {% block footer %}{% endblock %}
+    {% block content %}
+    <div class="container">
+        <h1><strong>Exam: </strong>{{ exam.examName }}</h1>
+        <h4><strong>Teacher:</strong> {{ exam.faculty.firstName }} {{ exam.faculty.lastName }}</h4>
+        <h4><strong>Location:</strong> {{ exam.location.campus }} Room {{ exam.location.roomNumber }}</h4>
+        <h4><strong>Date:</strong> {{ exam.examDate }}</h4>
+        <h4><strong>Time:</strong> {{ exam.examTime }}</h4>
+        <h4><strong>Capacity:</strong> {{ exam.examCapacity }}</h4>
+        <h4><strong>Currently Registered:</strong> {{ exam.examCount }}</h4>
+
+        <form method="POST" action="{{ url_for('register_exam', exam_id=exam.id) }}">
+            <input type="hidden" name="studentId" value="{{ loggedInUser.id }}">
+            <input type="hidden" name="locationId" value="{{ exam.locationId }}">
+            <button type="submit" class="btn btn-primary mt-3">Register for This Exam</button>
+        </form>
+
+    </div>
+
+    {% endblock %}
+
+
+</body>
+
+</html>
