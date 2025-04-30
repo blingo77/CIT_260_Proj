@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request, url_for, flash, redirect
 from flask import render_template
 from DAL.database import db, init_database
-from DAL.models import User, Student, Faculty, Exams
+from DAL.models import User, Student, Faculty, Exams, Location
 from .app_utils import createUsers, validateEmail
 
 # setup the application and specify where the template folder is located
@@ -139,22 +139,21 @@ def confirmation():
 def filter():
 
     location = request.args.get('location')
+    teacher = request.args.get('teacher')
 
-    # Assuming "examTeacher" corresponds to location
-    # and "examName" corresponds to subject
-
-    print(location)
-    query = Exams.query
+    query = Exams.query.join(Exams.location).join(Exams.faculty)
 
     if location:
-        query = query.filter(Exams.examLocation == location)
+        query = query.filter(Location.campus == location)
+    if teacher:
+        query = query.filter(Faculty.lastName == teacher)
 
     results = query.all()
 
-    print(results)
+    # Send faculty list to populate the dropdown
+    faculty_list = Faculty.query.all()
 
-    # You can return as JSON or pass to a template
-    return render_template("filter.html", exams=results)
+    return render_template("filter.html", exams=results, faculty_list=faculty_list)
 
 @app.route('/logout')
 def logout():
@@ -168,6 +167,6 @@ def logout():
 def exam_detail(exam_id):
     exam = Exams.query.get_or_404(exam_id)
     return render_template("exam_detail.html", exam=exam)
-    
+
 if __name__ == "__main__":
     app.run(debug=True)

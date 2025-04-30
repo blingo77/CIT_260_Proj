@@ -23,31 +23,41 @@
         <form method="GET" action="/filter">
             <label for="location">Location:</label>
             <select id="location" name="location">
+                <option value="">All</option>
                 <option value="Cheyenne">Cheyenne</option>
                 <option value="Henderson">Henderson</option>
                 <option value="West Charleston">West Charleston</option>
             </select>
     
-            <button type="submit">Filter</button>
+
+            <label for="teacher">Teacher:</label>
+            <select id="teacher" name="teacher">
+                <option value="">All</option>
+                {% for faculty in faculty_list %}
+                    <option value="{{ faculty.lastName }}">{{ faculty.firstName }} {{ faculty.lastName }}</option>
+                {% endfor %}
+            </select>
+            <br>
+            <button type="submit" style="font-size: 12px; padding: 4px 8px; border-radius: 4px; width: 80px;">
+                Filter</button>
+
         </form>
 
         <h2>Filtered Exams</h2>
         <ul>
 
             {% for exam in exams %}
-                <li>
-                    <a href="{{ url_for('exam_detail', exam_id=exam.id) }}">
-                        <strong>{{ exam.examName }}</strong> - 
-                        Teacher: {{ exam.faculty.firstName }} -
-                        Location: {{ exam.location.campus }}
-                    </a>
-                </li>
+                    <div onclick="window.location.href='{{ url_for('exam_detail', exam_id=exam.id) }}'" 
+                    style="cursor:pointer; padding:10px; background:#696969; color:white; border:none; border-radius:5px; margin:5px 0;">
+                 <strong>{{ exam.examName }}</strong> — 
+                 Teacher: {{ exam.faculty.firstName }} {{ exam.faculty.lastName }} — 
+                 Location: {{ exam.location.campus }} Room {{ exam.location.roomNumber }}
+               </div>
             {% else %}
                 <li>No exams found for that filter.</li>
             {% endfor %}
 
         </ul>
-
     </div>
 
     {% endblock %}

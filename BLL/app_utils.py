@@ -36,7 +36,13 @@ faculty = {
         "lastName":"Coombs",
         "email":"karen.coombs@csn.edu",
         "password":"password"
-        }
+        },
+    1 :{
+        "firstName":"Albert",
+        "lastName":"Einstein",
+        "email":"albert.einstein@csn.edu",
+        "password":"password"
+        },
 }
 
 location = {
@@ -120,6 +126,33 @@ def addExams():
     # Step 2: Add the exam using the existing Faculty and Location
     new_exam = Exams(
         examName="Fortnite BR",
+        examCount=2,
+        examCapacity=20,
+        examDate=datetime.today().date(),  # or None if not testing this field
+        examTime=datetime.now(),  # or None if not testing this field
+        facultyId=faculty.id,
+        locationId=location.id
+    )
+
+    db.session.add(new_exam)
+    db.session.commit()
+
+        # Step 1: Ensure Faculty and Location exist (or create them)
+    faculty = Faculty.query.filter_by(lastName="Coombs").first()
+    if not faculty:
+        faculty = Faculty(firstName="SomeName", lastName="Coombs", email="coombs@example.com", password="password")
+        db.session.add(faculty)
+        db.session.commit()
+
+    location = Location.query.filter_by(campus="Charleston").first()
+    if not location:
+        location = Location(campus="Charleston")
+        db.session.add(location)
+        db.session.commit()
+
+    # Step 2: Add the exam using the existing Faculty and Location
+    new_exam = Exams(
+        examName="Pubg BR",
         examCount=2,
         examCapacity=20,
         examDate=datetime.today().date(),  # or None if not testing this field
