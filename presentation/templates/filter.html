@@ -30,6 +30,24 @@
     
             <button type="submit">Filter</button>
         </form>
+
+        <h2>Filtered Exams</h2>
+        <ul>
+
+            {% for exam in exams %}
+                <li>
+                    <a href="{{ url_for('exam_detail', exam_id=exam.id) }}">
+                        <strong>{{ exam.examName }}</strong> - 
+                        Teacher: {{ exam.faculty.firstName }} -
+                        Location: {{ exam.location.campus }}
+                    </a>
+                </li>
+            {% else %}
+                <li>No exams found for that filter.</li>
+            {% endfor %}
+
+        </ul>
+
     </div>
 
     {% endblock %}

@@ -45,12 +45,16 @@ class Exams(db.Model):
     __tablename__ = "exams"
     id = db.Column(db.Integer, primary_key=True)
     examName = db.Column(db.String(100), nullable=False)
-    examTeacher = db.Column(db.String(100), nullable=False)
-    examLocation = db.Column(db.String(100), nullable=False)
     examDate = db.Column(db.Date, nullable=True)
     examTime = db.Column(db.Date, nullable=True)
     examCapacity = db.Column(db.Integer, nullable=True)
     examCount = db.Column(db.Integer, nullable=True)
+
+    facultyId = db.Column(db.Integer, db.ForeignKey('faculty.id'), nullable=True)
+    locationId = db.Column(db.Integer, db.ForeignKey('location.id'), nullable=True)
+
+    faculty = db.relationship('Faculty', backref='exams', lazy=True)
+    location = db.relationship('Location', backref='exams', lazy=True)
 
     def to_dict(self):
         return{
@@ -58,3 +62,9 @@ class Exams(db.Model):
             "ExamName": self.examName, 
             "ExamTeacher": self.examTeacher,
             "ExamDate": self.examDate}
+
+class Location(db.Model):
+    __tablename = "location"
+    id = db.Column(db.Integer, primary_key=True)
+    campus = db.Column(db.String(100), nullable=False)
+

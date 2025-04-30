@@ -154,8 +154,7 @@ def filter():
     print(results)
 
     # You can return as JSON or pass to a template
-    return render_template("filter.html")
-
+    return render_template("filter.html", exams=results)
 
 @app.route('/logout')
 def logout():
@@ -165,5 +164,10 @@ def logout():
 
     return render_template("login.html")
 
+@app.route('/exam/<int:exam_id>')
+def exam_detail(exam_id):
+    exam = Exams.query.get_or_404(exam_id)
+    return render_template("exam_detail.html", exam=exam)
+    
 if __name__ == "__main__":
     app.run(debug=True)
