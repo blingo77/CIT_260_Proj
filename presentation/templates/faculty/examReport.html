@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!--
+We still need to ensure that the user logins work correctly to ensure that
+this page can only be accessed by faculty members. We also need to update the
+hamburger to include a faculty report for logged in faculty members.
+
+The dummy data needs to be removed allowed to pull from the database.
+-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam Report - Faculty View</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/examReport.css') }}">
+    <!--Dummy Data, can be removed after full integration-->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.querySelector(".filter-form");
+            const tbody = document.querySelector(".exam-report-table tbody");
+
+            const dummyData = [
+                {
+                    student_name: "Javier Hernandez",
+                    exam_name: "CIT 260 Final",
+                    date: "2025-05-01",
+                    time: "10:00 AM",
+                    room: "Room 101",
+                    campus: "North Las Vegas",
+                    proctor: "Prof. X",
+                    type: "final"
+                },
+                {
+                    student_name: "Alice Smith",
+                    exam_name: "MATH 182 Midterm",
+                    date: "2025-04-10",
+                    time: "9:00 AM",
+                    room: "Room 202",
+                    campus: "Charleston",
+                    proctor: "Dr. Grey",
+                    type: "midterm"
+                },
+                {
+                    student_name: "Bob Lee",
+                    exam_name: "CSN Quiz",
+                    date: "2025-04-04",
+                    time: "11:00 AM",
+                    room: "Room 103",
+                    campus: "Henderson",
+                    proctor: "Ms. Wells",
+                    type: "quiz"
+                }
+            ];
+
+            form.addEventListener("submit", function (e) {
+                e.preventDefault();
+                const startDate = document.getElementById("start-date").value;
+                const endDate = document.getElementById("end-date").value;
+                const examType = document.getElementById("exam-type").value;
+
+                const filtered = dummyData.filter(item => {
+                    const itemDate = new Date(item.date);
+                    const start = startDate ? new Date(startDate) : null;
+                    const end = endDate ? new Date(endDate) : null;
+                    return (!start || itemDate >= start) &&
+                           (!end || itemDate <= end) &&
+                           (!examType || item.type === examType);
+                });
+
+                tbody.innerHTML = "";
+                filtered.forEach(row => {
+                    tbody.innerHTML += `
+                        <tr>
+                            <td>${row.student_name}</td>
+                            <td>${row.exam_name}</td>
+                            <td>${row.date}</td>
+                            <td>${row.time}</td>
+                            <td>${row.room}</td>
+                            <td>${row.campus}</td>
+                            <td>${row.proctor}</td>
+                        </tr>`;
+                });
+            });
+        });
+    </script>
+    <!-- end dummy data-->
+</head>
+
+<body>
+    {% extends 'base.html' %}
+
+    {% block title %}Exam Report - Faculty{% endblock %}
+
+    {% block content %}
+    <div class="report-box">
+        <h1>Exam Report Filter</h1>
+        <form class="filter-form">
+            <div>
+                <label for="start-date">Start Date:</label><br>
+                <input type="date" id="start-date" name="start-date">
+            </div>
+            <div>
+                <label for="end-date">End Date:</label><br>
+                <input type="date" id="end-date" name="end-date">
+            </div>
+            <div>
+                <label for="exam-type">Exam:</label><br>
+                <select id="exam-type" name="exam-type">
+                    <option value="">All Exams</option>
+                    <option value="midterm">Midterms</option>
+                    <option value="final">Finals</option>
+                    <option value="quiz">Quizzes</option>
+                </select>
+            </div>
+            <div>
+                <button class="btn" type="submit">Apply Filter</button>
+                <button class="btn print-btn" onclick="window.print()">Print PDF</button>
+
+            </div>
+        </form>
+        <div class="exam-report-table-wrapper">
+            <table class="exam-report-table">
+                <thead>
+                    <tr>
+                        <th>Student Name</th>
+                        <th>Exam</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Room</th>
+                        <th>Campus</th>
+                        <th>Proctor</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for report in reports %}
+                    <tr>
+                        <td>{{ report.student.firstName }} {{ report.student.lastName }}</td>
+                        <td>{{ report.exam.examName }}</td>
+                        <td>{{ report.exam.examDate }}</td>
+                        <td>{{ report.exam.examTime }}</td>
+                        <td>Room {{ report.exam.location.roomNumber }}</td>
+                        <td>{{ report.exam.location.campus }}</td>
+                        <td>{{ report.exam.faculty.firstName }} {{ report.exam.faculty.lastName }}</td>
+                    </tr>
+                    {% else %}
+                    <tr><td colspan="7">No exam reports found.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    {% endblock %}
+</body>
+
+</html>

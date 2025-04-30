@@ -1,6 +1,7 @@
-from DAL.models import User, Student, Faculty
+from DAL.models import Student, Faculty, Exams, Location
 from DAL.database import db
 from flask import current_app
+from datetime import datetime
 
 students = { 
     0 :{
@@ -35,7 +36,25 @@ faculty = {
         "lastName":"Coombs",
         "email":"karen.coombs@csn.edu",
         "password":"password"
-        }
+        },
+    1 :{
+        "firstName":"Albert",
+        "lastName":"Einstein",
+        "email":"albert.einstein@csn.edu",
+        "password":"password"
+        },
+}
+
+location = {
+    0:{
+        "campus": "henderson"
+    },
+    1:{
+        "campus":"charleston"
+    },
+    2:{
+        "campus":"cheyenne"
+    }
 }
 
 def createUsers(app):
@@ -52,13 +71,7 @@ def createUsers(app):
             )
             db.session.add(new_user)
             db.session.commit()
-            
-        studentss = Student.query.all()  # Returns a list of all student objects
-    
-        # You can either print them out in the console or pass them to the template
-        for student in studentss:
-            print(f"Name: {student.firstName} {student.lastName}, Email: {student.email}, NSHEID: {student.NSHEID}")
-
+                
         # add faculty
         for i in range(len(faculty)):
             new_user = Faculty(
@@ -70,6 +83,17 @@ def createUsers(app):
 
             db.session.add(new_user)
             db.session.commit()
+
+        for i in range(len(location)):
+            new_location = Location(
+                campus = location[i]["campus"]
+            )
+
+            db.session.add(new_location)
+            db.session.commit()
+
+        addExams()
+
 
 def validateEmail(email):
 
@@ -83,3 +107,59 @@ def validateEmail(email):
     if emailEnd == studentEmail: return 1
     elif emailEnd == facultyEmail: return 2
     else: return 0  #email is not valid
+
+def addExams():
+    
+    # Step 1: Ensure Faculty and Location exist (or create them)
+    faculty = Faculty.query.filter_by(lastName="Coombs").first()
+    if not faculty:
+        faculty = Faculty(firstName="SomeName", lastName="Coombs", email="coombs@example.com", password="password")
+        db.session.add(faculty)
+        db.session.commit()
+
+    location = Location.query.filter_by(campus="Henderson").first()
+    if not location:
+        location = Location(campus="Henderson")
+        db.session.add(location)
+        db.session.commit()
+
+    # Step 2: Add the exam using the existing Faculty and Location
+    new_exam = Exams(
+        examName="Fortnite BR",
+        examCount=2,
+        examCapacity=20,
+        examDate=datetime.today().date(),  # or None if not testing this field
+        examTime=datetime.now(),  # or None if not testing this field
+        facultyId=faculty.id,
+        locationId=location.id
+    )
+
+    db.session.add(new_exam)
+    db.session.commit()
+
+        # Step 1: Ensure Faculty and Location exist (or create them)
+    faculty = Faculty.query.filter_by(lastName="Coombs").first()
+    if not faculty:
+        faculty = Faculty(firstName="SomeName", lastName="Coombs", email="coombs@example.com", password="password")
+        db.session.add(faculty)
+        db.session.commit()
+
+    location = Location.query.filter_by(campus="Charleston").first()
+    if not location:
+        location = Location(campus="Charleston")
+        db.session.add(location)
+        db.session.commit()
+
+    # Step 2: Add the exam using the existing Faculty and Location
+    new_exam = Exams(
+        examName="Pubg BR",
+        examCount=2,
+        examCapacity=20,
+        examDate=datetime.today().date(),  # or None if not testing this field
+        examTime=datetime.now(),  # or None if not testing this field
+        facultyId=faculty.id,
+        locationId=location.id
+    )
+
+    db.session.add(new_exam)
+    db.session.commit()

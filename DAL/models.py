@@ -45,8 +45,16 @@ class Exams(db.Model):
     __tablename__ = "exams"
     id = db.Column(db.Integer, primary_key=True)
     examName = db.Column(db.String(100), nullable=False)
-    examTeacher = db.Column(db.String(100), nullable=False)
     examDate = db.Column(db.Date, nullable=True)
+    examTime = db.Column(db.Date, nullable=True)
+    examCapacity = db.Column(db.Integer, nullable=True)
+    examCount = db.Column(db.Integer, nullable=True)
+
+    facultyId = db.Column(db.Integer, db.ForeignKey('faculty.id'), nullable=True)
+    locationId = db.Column(db.Integer, db.ForeignKey('location.id'), nullable=True)
+
+    faculty = db.relationship('Faculty', backref='exams', lazy=True)
+    location = db.relationship('Location', backref='exams', lazy=True)
 
     def to_dict(self):
         return{
@@ -54,3 +62,19 @@ class Exams(db.Model):
             "ExamName": self.examName, 
             "ExamTeacher": self.examTeacher,
             "ExamDate": self.examDate}
+
+class Location(db.Model):
+    __tablename = "location"
+    id = db.Column(db.Integer, primary_key=True)
+    campus = db.Column(db.String(100), nullable=False)
+
+class Report(db.Model):
+    __tablename__ = 'report'
+    id = db.Column(db.Integer, primary_key=True)
+    
+    studentId = db.Column(db.Integer, db.ForeignKey('students.id'), nullable=False)
+    examId = db.Column(db.Integer, db.ForeignKey('exams.id'), nullable=False)
+    
+    # Relationships
+    student = db.relationship('Student', backref='reports', lazy=True)
+    exam = db.relationship('Exams', backref='reports', lazy=True)
