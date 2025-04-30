@@ -118,19 +118,6 @@ def login():
 
     return render_template("login.html")
 
-@app.route('/add_user', methods=['GET'])
-def add_user():
-    new_user = User(name="John Doe", email="john@example.com")
-    db.session.add(new_user)
-    db.session.commit()
-    return f"User {new_user.name} added!"
-
-@app.route('/users', methods=['GET'])
-def get_users():
-    users = User.query.all()
-    return jsonify([user.to_dict() for user in users])
-
-
 @app.route('/confirmation')
 def confirmation():
     return render_template("confirmation.html")
@@ -167,6 +154,11 @@ def logout():
 def exam_detail(exam_id):
     exam = Exams.query.get_or_404(exam_id)
     return render_template("exam_detail.html", exam=exam)
+
+# needs to be updated to allow only logged in faculty to view
+@app.route('/examReport')
+def examReport():
+    return render_template("faculty/examReport.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
