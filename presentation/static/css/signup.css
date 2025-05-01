@@ -163,3 +163,23 @@ form {
     margin-top: 100px;
     margin-left: -25px;
 }
+
+.back-button {
+    position: absolute;
+    top: 100px;
+    left: 30px;
+    font-size: 1rem;
+    color: var(--csn-blue);
+    text-decoration: none;
+    font-weight: bold;
+    background-color: var(--csn-yellow);
+    padding: 8px 12px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+    background-color: var(--csn-blue);
+    text-decoration: underline;
+}
