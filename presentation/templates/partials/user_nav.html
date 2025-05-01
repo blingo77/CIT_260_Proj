@@ -20,6 +20,9 @@
             {% elif loggedInUser and loggedInUser.role == 'student' %}
                 <li><a href="{{ url_for('filter') }}">Scheduled Tests</a></li>
                 <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                <li><a href="{{ url_for('view_exams') }}">View My Exams</a></li>
+
+                
             {% endif %}
         
             {% if not loggedInUser %}

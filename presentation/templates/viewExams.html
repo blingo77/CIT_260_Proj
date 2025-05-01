@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam Registration - Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/cancelReg.css') }}">
+</head>
+
+<body>
+    {% extends 'base.html' %}
+
+    {% block title %}View My Exams{% endblock %}
+    
+    {% block content %}
+        <h2>Your Registered Exams</h2>
+        {% if exams %}
+            <table>
+                <tr>
+                    <th>Exam Name</th>
+                    <th>Date</th>
+                    <th>Location</th>
+                    <th>Action</th>
+                </tr>
+                {% for exam in exams %}
+                <tr>
+                    <td>{{ exam.exam_name }}</td>
+                    <td>{{ exam.exam_date }}</td>
+                    <td>{{ exam.location }}</td>
+                    <td>
+                        <form method="POST" action="{{ url_for('cancel_exam') }}">
+                            <input type="hidden" name="exam_registration_id" value="{{ exam.exam_registration_id }}">
+                            <button type="submit">Cancel</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        {% else %}
+            <p>You are not currently registered for any exams.</p>
+        {% endif %}
+    {% endblock %}    
+    
+</body>
+
+</html>

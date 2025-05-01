@@ -195,5 +195,40 @@ def register_exam(exam_id):
 
     return redirect(url_for('exam_detail', exam_id=exam.id))
 
+
+# this is for javis cancel page test
+
+from flask import render_template, request, redirect, url_for, session, flash
+from DAL.models import db, Exams, Report  # use your actual model names here
+
+@app.route('/view-exams', methods=['GET'])
+def view_exams():
+    student_id = session.get('student_id')
+    if not student_id:
+        flash("You must be logged in as a student.")
+        return redirect(url_for('login'))
+
+    exams = db.session.query(ExamRegistration).join(Exam).filter(
+        ExamRegistration.Student_ID == student_id
+    ).all()
+
+    return render_template('viewExams.html', exams=exams)
+
+
+
+@app.route('/cancel-exam', methods=['POST'])
+def cancel_exam():
+    exam_registration_id = request.form.get('exam_registration_id')
+    if exam_registration_id:
+        registration = ExamRegistration.query.get(exam_registration_id)
+        if registration:
+            db.session.delete(registration)
+            db.session.commit()
+            flash("Successfully canceled the exam.")
+        else:
+            flash("Registration not found.")
+    return redirect(url_for('cancel_registration_page'))
+# end
+
 if __name__ == "__main__":
     app.run(debug=True)
