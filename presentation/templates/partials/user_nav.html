@@ -14,14 +14,13 @@
             <li><a href="{{ url_for('home') }}">Home</a></li>
 
             {% if loggedInUser and loggedInUser.role == 'faculty' %}
-                <li><a href="{{ url_for('examReport') }}">Reports</a></li>
-                <li><a href="{{ url_for('filter') }}">Scheduled Tests</a></li>
+            <a href="{{ url_for('faculty_report') }}">Exam Reports</a>
+                <li><a href="{{ url_for('filter') }}">View Exams</a></li>
                 <li><a href="{{ url_for('logout') }}">Logout</a></li>
             {% elif loggedInUser and loggedInUser.role == 'student' %}
-                <li><a href="{{ url_for('filter') }}">Scheduled Tests</a></li>
-                <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                <li><a href="{{ url_for('filter') }}">Schedule an Exam</a></li>
                 <li><a href="{{ url_for('view_exams') }}">View My Exams</a></li>
-
+                <li><a href="{{ url_for('logout') }}">Logout</a></li>
                 
             {% endif %}
         

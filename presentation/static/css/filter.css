@@ -1,0 +1,114 @@
+/* Container Styling */
+main {
+    flex: 1;
+    width: 60%;
+    margin: 100px auto 2rem auto;
+    background-color: var(--csn-white);
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+
+.report-box {
+    padding-top: 120px;
+    background-color: var(--csn-beige);
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    max-width: 800px;
+    margin: 2rem auto;
+}
+
+/* Headings */
+.report-box h2 {
+    text-align: center;
+    color: var(--csn-blue);
+    margin-bottom: 1rem;
+}
+
+/* Filter Form Layout */
+.filter-form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.filter-form .form-group {
+    flex: 1 1 45%;
+    min-width: 200px;
+}
+
+.filter-form label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 0.25rem;
+}
+
+.filter-form select,
+.filter-form input[type="date"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.btn {
+    text-align: center;
+}
+
+
+.btn.btn-filter {
+    background-color: var(--csn-yellow);
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #000;
+}
+
+.btn.btn-filter:hover {
+    background-color: #e2bd3f;
+}
+
+/* Exam List Buttons */
+.exam-report-table-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.exam-report-table-wrapper .btn {
+    background-color: var(--csn-blue);
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 1rem;
+    text-align: left;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.exam-report-table-wrapper .btn:hover {
+    background-color: #e2bd3f;
+}
+
+.exam-report-table-wrapper .btn {
+    background-color: var(--csn-blue);
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: center;              /* ⬅️ Add this line */
+    display: flex;                   /* ⬅️ Add these two lines */
+    flex-direction: column;         /* ⬅️ So text stacks vertically */
+    align-items: center;            /* ⬅️ Center horizontally */
+    justify-content: center;        /* ⬅️ Center vertically */
+}

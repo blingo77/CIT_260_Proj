@@ -5,43 +5,72 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Exam Registration - Home</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/cancelReg.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/viewExams.css') }}">
 </head>
 
 <body>
     {% extends 'base.html' %}
 
     {% block title %}View My Exams{% endblock %}
-    
+
+    {% block head_extra %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/viewExams.css') }}">
+    {% endblock %}
+
     {% block content %}
+    <section class="report-box">
         <h2>Your Registered Exams</h2>
+
         {% if exams %}
-            <table>
-                <tr>
-                    <th>Exam Name</th>
-                    <th>Date</th>
-                    <th>Location</th>
-                    <th>Action</th>
-                </tr>
-                {% for exam in exams %}
-                <tr>
-                    <td>{{ exam.exam_name }}</td>
-                    <td>{{ exam.exam_date }}</td>
-                    <td>{{ exam.location }}</td>
-                    <td>
-                        <form method="POST" action="{{ url_for('cancel_exam') }}">
-                            <input type="hidden" name="exam_registration_id" value="{{ exam.exam_registration_id }}">
-                            <button type="submit">Cancel</button>
-                        </form>
-                    </td>
-                </tr>
-                {% endfor %}
+        <div class="exam-report-table-wrapper">
+            <table class="exam-report-table">
+                <thead>
+                    <tr>
+                        <th>Exam Name</th>
+                        <th>Type</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Room</th>
+                        <th>Campus</th>
+                        <th>Teacher</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for exam in exams %}
+                    <tr>
+                        <td>{{ exam.exam.examName }}</td>
+                        <td>{{ exam.exam.examType|capitalize }}</td>
+                        <td>{{ exam.exam.examDate.strftime('%B %d, %Y') }}</td>
+                        <td>{{ exam.exam.examTime.strftime('%I:%M %p') }}</td>
+                        <td>Room {{ exam.exam.location.roomNumber }}</td>
+                        <td>{{ exam.exam.location.campus }}</td>
+                        <td>{{ exam.exam.faculty.firstName }} {{ exam.exam.faculty.lastName }}</td>
+                        <td class="action-cell">
+                            <form method="POST" action="{{ url_for('cancel_exam') }}" onsubmit="return confirmCancel();">
+                                <input type="hidden" name="exam_registration_id" value="{{ exam.id }}">
+                                <button type="submit" class="btn">Cancel</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
             </table>
+        </div>
         {% else %}
-            <p>You are not currently registered for any exams.</p>
+        <p>You are not currently registered for any exams.</p>
         {% endif %}
-    {% endblock %}    
-    
+    </section>
+    {% endblock %}
+
+    {% block scripts %}
+    <script>
+        function confirmCancel() {
+            return confirm("Are you sure you want to cancel this exam?");
+        }
+    </script>
+    {% endblock %}
+
 </body>
 
 </html>
