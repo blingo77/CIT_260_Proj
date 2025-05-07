@@ -47,7 +47,7 @@ faculty = {
 
 location = {
     0: {"campus": "henderson"},
-    1: {"campus": "charleston"},
+    1: {"campus": "West Charleston"},
     2: {"campus": "cheyenne"}
 }
 
@@ -114,9 +114,9 @@ def addExams():
 
     exams = [
         ("Fortnite BR", "Henderson", 2, 20, "quiz"),
-        ("Pubg BR", "Charleston", 2, 20, "midterm"),
+        ("Pubg BR", "West Charleston", 2, 20, "midterm"),
         ("Apex Legends", "Cheyenne", 0, 20, "quiz"),
-        ("Rocket League Finals", "Charleston", 0, 20, "quiz"),
+        ("Rocket League Finals", "West Charleston", 0, 20, "quiz"),
         ("Halo Infinite Qualifier", "Henderson", 0, 20, "final"),
         ("Call of Duty Invitational", "Cheyenne", 20, 20, "final")
     ]
