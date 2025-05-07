@@ -1,0 +1,99 @@
+/* =========================
+   View Exams Page Styling
+=========================== */
+
+main {
+    flex: 1;
+    width: 95%;
+    height: 100%;
+    margin: 100px auto 2rem auto;
+    padding: 2rem;
+    background-color: var(--csn-white);
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.report-box {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: var(--csn-beige);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+.report-box h2 {
+    text-align: center;
+    color: var(--csn-blue);
+    margin-bottom: 1.5rem;
+}
+
+.exam-report-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.exam-report-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--csn-white);
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+    font-size: 0.95rem;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.exam-report-table th,
+.exam-report-table td {
+    padding: 12px 16px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.exam-report-table th {
+    background-color: var(--csn-blue);
+    color: white;
+    font-size: 1rem;
+}
+
+.exam-report-table td {
+    background-color: #fdfdfd;
+}
+
+.btn {
+    padding: 6px 12px;
+    background-color: var(--csn-yellow);
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    color: #000;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: red;
+    color: white;
+}
+
+.action-cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+@media screen and (max-width: 768px) {
+    main {
+        width: 95%;
+        padding: 1rem;
+        margin-top: 100px;
+    }
+
+    .exam-report-table th,
+    .exam-report-table td {
+        font-size: 0.85rem;
+        padding: 10px;
+    }
+}

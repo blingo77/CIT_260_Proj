@@ -1,4 +1,6 @@
 from DAL.database import db
+from datetime import date, time
+from sqlalchemy import Date, Time
 
 class User(db.Model):
     __tablename__ = 'users'  # Optional, sets table name
@@ -47,6 +49,7 @@ class Exams(db.Model):
     examName = db.Column(db.String(100), nullable=False)
     examDate = db.Column(db.Date, nullable=True)
     examTime = db.Column(db.Date, nullable=True)
+    examType = db.Column(db.String(20), nullable=False, default="quiz")
     examCapacity = db.Column(db.Integer, nullable=True)
     examCount = db.Column(db.Integer, nullable=True)
 
@@ -69,12 +72,13 @@ class Location(db.Model):
     campus = db.Column(db.String(100), nullable=False)
 
 class Report(db.Model):
-    __tablename__ = 'report'
     id = db.Column(db.Integer, primary_key=True)
+    studentId = db.Column(db.Integer, db.ForeignKey('students.id'))
+    examId = db.Column(db.Integer, db.ForeignKey('exams.id'))
     
-    studentId = db.Column(db.Integer, db.ForeignKey('students.id'), nullable=False)
-    examId = db.Column(db.Integer, db.ForeignKey('exams.id'), nullable=False)
-    
-    # Relationships
-    student = db.relationship('Student', backref='reports', lazy=True)
-    exam = db.relationship('Exams', backref='reports', lazy=True)
+    # NEW FIELDS
+    scheduledDate = db.Column(Date)
+    scheduledTime = db.Column(Time)
+
+    student = db.relationship('Student', backref='reports')
+    exam = db.relationship('Exams', backref='reports')

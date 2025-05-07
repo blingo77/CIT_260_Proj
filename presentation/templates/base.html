@@ -9,27 +9,30 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/LOGO.png') }}">
 
-    {% block head_extra %}{% endblock %}   <!-- -->
+    {% block head_extra %}{% endblock %}
 </head>
 
 <body>
-    {% set user_authenticated = true %} {# change to false to test guest view #}
 
-    {% if user_authenticated %}
-    {% include 'partials/user_nav.html' %}
+    {% if loggedInUser %}
+        {% include 'partials/user_nav.html' %}
     {% else %}
-    {% include 'partials/guest_nav.html' %}
+        {% include 'partials/guest_nav.html' %}
     {% endif %}
 
     <!-- Page Content -->
     <main>
         {% block content %}{% endblock %}
     </main>
+
     {% block footer %}
         {% include 'partials/footer.html' %}
     {% endblock %}
 
     <script src="{{ url_for('static', filename='js/menu-toggle.js') }}"></script>
+    
+    {% block scripts %}
+    {% endblock %}
 
 </body>
 

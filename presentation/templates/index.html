@@ -23,10 +23,12 @@
             faculty, and external institutions. Whether you're preparing for placement, instructor-led, or national
             exams, our centers are here to support your success.
         </p>
+        {% if not loggedInUser %}
         <ul class="loginsignup">
             <li><a href="{{ url_for('signup') }}" class="btn">Sign Up</a></li>
             <li><a href="{{ url_for('login') }}" class="btn">Login</a></li>
         </ul>
+        {% endif %}
     </section>
 
     <section id="news">
