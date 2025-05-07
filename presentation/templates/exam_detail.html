@@ -16,7 +16,7 @@
 <div class="container">
     <h1><strong>Exam: </strong>{{ exam.examName }}</h1>
     <h4><strong>Teacher:</strong> {{ exam.faculty.firstName }} {{ exam.faculty.lastName }}</h4>
-    <h4><strong>Location:</strong> {{ exam.location.campus }} Room {{ exam.location.roomNumber }}</h4>
+    <h4><strong>Location:</strong> {{ exam.location.campus }}</h4>
     <h4><strong>Capacity:</strong> {{ exam.examCapacity }}</h4>
     <h4><strong>Currently Registered:</strong> {{ exam.examCount }}</h4>
 
@@ -25,17 +25,23 @@
         <input type="hidden" name="studentId" value="{{ loggedInUser['id'] }}">
         <input type="hidden" name="locationId" value="{{ exam.locationId }}">
 
-            {% if exam.examCount >= exam.examCapacity %}
-                <p style="color: red; font-weight: bold; margin-top: 1.5rem;">This exam is at full capacity. You cannot register.</p>
-            {% endif %}
-            {% if exam.examCount <= exam.examCapacity %}
+
+            {% if loggedInUser and loggedInUser['role'] == 'student' and exam.examCount < exam.examCapacity %}
+            <form method="POST" action="{{ url_for('register_exam', exam_id=exam.id) }}">
+                <input type="hidden" name="studentId" value="{{ loggedInUser['id'] }}">
+                <input type="hidden" name="locationId" value="{{ exam.locationId }}">
+            
                 <label for="selectedDate"><strong>Select a Date:</strong></label><br>
                 <input type="date" id="selectedDate" name="selectedDate" required><br><br>
-        
+            
                 <label for="selectedTime"><strong>Select a Time:</strong></label><br>
                 <input type="time" id="selectedTime" name="selectedTime" required><br><br>
                 <button type="submit" class="btn btn-primary mt-3">Register for This Exam</button>
+            </form>
+            {% elif loggedInUser and loggedInUser['role'] == 'student' %}
+            <p style="color: red; font-weight: bold; margin-top: 1.5rem;">This exam is at full capacity. You cannot register.</p>
             {% endif %}
+            
     </form>
     {% endif %}
 

@@ -3,6 +3,7 @@ from DAL.database import db, init_database
 from DAL.models import User, Student, Faculty, Exams, Location, Report
 from .app_utils import createUsers, validateEmail
 from datetime import datetime, timedelta, date, time
+from sqlalchemy import func
 
 app = Flask(__name__, template_folder="../presentation/templates", static_folder="../presentation/static")
 app.secret_key = "supersecretkey"
@@ -89,20 +90,25 @@ def logout():
 def confirmation():
     return render_template("confirmation.html")
 
-@app.route('/filter', methods=['GET'])
+@app.route('/filter')
 def filter():
     location = request.args.get('location')
     teacher = request.args.get('teacher')
 
-    query = Exams.query.join(Exams.location).join(Exams.faculty)
+    query = db.session.query(Exams).join(Location).join(Faculty)
+
     if location:
-        query = query.filter(Location.campus == location)
+        query = query.filter(func.lower(Location.campus) == location.lower())
+
     if teacher:
         query = query.filter(Faculty.lastName == teacher)
 
-    results = query.all()
+    exams = query.all()
+
+    # You'll need this if your template uses it:
     faculty_list = Faculty.query.all()
-    return render_template("filter.html", exams=results, faculty_list=faculty_list)
+
+    return render_template('filter.html', exams=exams, faculty_list=faculty_list)
 
 @app.route('/exam/<int:exam_id>')
 def exam_detail(exam_id):
