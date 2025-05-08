@@ -113,12 +113,12 @@ def addExams():
         return faculty, location
 
     exams = [
-        ("Fortnite BR", "Henderson", 2, 20, "quiz"),
-        ("Pubg BR", "West Charleston", 2, 20, "midterm"),
-        ("Apex Legends", "Cheyenne", 0, 20, "quiz"),
-        ("Rocket League Finals", "West Charleston", 0, 20, "quiz"),
-        ("Halo Infinite Qualifier", "Henderson", 0, 20, "final"),
-        ("Call of Duty Invitational", "Cheyenne", 20, 20, "final")
+        ("Introduction to Fortnite FTNT101", "Henderson", 2, 20, "quiz"),
+        ("PUBG Tactics PUBG202", "West Charleston", 2, 20, "midterm"),
+        ("Apex Legends Third Party Logic APL114", "Cheyenne", 0, 20, "quiz"),
+        ("Rocket League History RTL210", "West Charleston", 0, 20, "quiz"),
+        ("Halo Media Ethics HLO203", "Henderson", 0, 20, "final"),
+        ("Call of Duty Zombies Stratigical Analysis COD208", "Cheyenne", 20, 20, "final")
     ]
 
 

@@ -1,74 +1,70 @@
 {% extends 'base.html' %}
 
-    {% block title %}Exam Report - Faculty{% endblock %}
-    
-    {% block head_extra %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/examReport.css') }}">
-    {% endblock %}
-    
-    {% block content %}
-    <div class="report-box">
-        <h1>Exam Report Filter</h1>
-        <form class="filter-form" method="GET" action="{{ url_for('faculty_report') }}">
-            <div>
-                <label for="start-date">Start Date:</label><br>
-                <input type="date" id="start-date" name="start-date">
-            </div>
-            <div>
-                <label for="end-date">End Date:</label><br>
-                <input type="date" id="end-date" name="end-date">
-            </div>
-            <div>
-                <label for="exam-type">Exam:</label><br>
-                <select id="exam-type" name="exam-type">
-                    <option value="">All Exams</option>
-                    <option value="midterm">Midterms</option>
-                    <option value="final">Finals</option>
-                    <option value="quiz">Quizzes</option>
-                </select>
-            </div>
-            <div>
-                <button class="btn" type="submit">Apply Filter</button>
-                <button class="btn print-btn" onclick="window.print(); return false;">Print PDF</button>
-            </div>
-        </form>
-        <div class="exam-report-table-wrapper">
-            <table class="exam-report-table">
-                <thead>
-                    <tr>
-                        <th>Student Name</th>
-                        <th>Exam</th>
-                        <th>Type</th>
-                        <th>Date</th>
-                        <th>Time</th>
-                        <th>Room</th>
-                        <th>Campus</th>
-                        <th>Proctor</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for report in reports %}
-                    <tr>
-                        <td>{{ report.student.firstName }} {{ report.student.lastName }}</td>
-                        <td>{{ report.exam.examName }}</td>
-                        <td>{{ report.exam.examType|capitalize }}</td>
-                        <td>{{ report.exam.examDate.strftime('%B %d, %Y') }}</td>
-                        <td>{{ report.exam.examTime.strftime('%I:%M %p') }}</td>
-                        <td>Room {{ report.exam.location.roomNumber }}</td>
-                        <td>{{ report.exam.location.campus }}</td>
-                        <td>{{ report.exam.faculty.firstName }} {{ report.exam.faculty.lastName }}</td>
-                    </tr>
-                    {% else %}
-                    <tr><td colspan="8">No exam reports found.</td></tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
-    </div>
-    {% endblock %}
-    
-    
-</body>
+{% block title %}Exam Report - Faculty{% endblock %}
 
-</html>
+{% block head_extra %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/examReport.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="report-box">
+    <h1>Exam Report Filter</h1>
+    <form class="filter-form" method="GET" action="{{ url_for('faculty_report') }}">
+        <div>
+            <label for="start-date">Start Date:</label><br>
+            <input type="date" id="start-date" name="start-date">
+        </div>
+        <div>
+            <label for="end-date">End Date:</label><br>
+            <input type="date" id="end-date" name="end-date">
+        </div>
+        <div>
+            <label for="exam-type">Exam:</label><br>
+            <select id="exam-type" name="exam-type">
+                <option value="">All Exams</option>
+                <option value="midterm">Midterms</option>
+                <option value="final">Finals</option>
+                <option value="quiz">Quizzes</option>
+            </select>
+        </div>
+        <div>
+            <button class="btn" type="submit">Apply Filter</button>
+            <button class="btn print-btn" onclick="window.print(); return false;">Print PDF</button>
+        </div>
+    </form>
+
+    <div class="exam-report-table-wrapper">
+        <table class="exam-report-table">
+            <thead>
+                <tr>
+                    <th>Student Name</th>
+                    <th>Exam</th>
+                    <th>Type</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Room</th>
+                    <th>Campus</th>
+                    <th>Proctor</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for report in reports %}
+                <tr>
+                    <td>{{ report.student.firstName }} {{ report.student.lastName }}</td>
+                    <td>{{ report.exam.examName }}</td>
+                    <td>{{ report.exam.examType|capitalize }}</td>
+                    <td>{{ report.exam.examDate.strftime('%B %d, %Y') }}</td>
+                    <td>{{ report.scheduledTime.strftime('%I:%M %p') }}</td>
+                    <td>Room {{ report.exam.location.roomNumber }}</td>
+                    <td>{{ report.exam.location.campus }}</td>
+                    <td>{{ report.exam.faculty.firstName }} {{ report.exam.faculty.lastName }}</td>
+                </tr>
+                {% else %}
+                <tr><td colspan="8">No exam reports found.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
