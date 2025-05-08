@@ -42,7 +42,7 @@
                         <td>{{ exam.exam.examName }}</td>
                         <td>{{ exam.exam.examType|capitalize }}</td>
                         <td>{{ exam.exam.examDate.strftime('%B %d, %Y') }}</td>
-                        <td>{{ exam.exam.examTime.strftime('%I:%M %p') }}</td>
+                        <td>{{ exam.scheduledTime.strftime('%I:%M %p') }}</td>
                         <td>Room {{ exam.exam.location.roomNumber }}</td>
                         <td>{{ exam.exam.location.campus }}</td>
                         <td>{{ exam.exam.faculty.firstName }} {{ exam.exam.faculty.lastName }}</td>

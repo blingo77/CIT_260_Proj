@@ -162,7 +162,7 @@ def register_exam(exam_id):
     db.session.commit()
 
     flash("Registration successful!", "success")
-    return redirect(url_for('exam_detail', exam_id=exam_id))
+    return redirect(url_for('registered'))
   
 
 @app.route('/view-exams', methods=['GET'])
@@ -207,6 +207,10 @@ def faculty_report():
 
     reports = query.all()
     return render_template("faculty/examReport.html", reports=reports)
+
+@app.route('/registered')
+def registered():
+    return render_template("registered.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
